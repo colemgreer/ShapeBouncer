@@ -12,7 +12,6 @@ def createShape(shapeName):
     ball = turtle.Turtle();
     ball.shape(shapeName);
     ball.color("red");
-    ball.pack()
 
 createShape("circle")
 window.mainloop()
