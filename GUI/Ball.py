@@ -8,10 +8,10 @@ window = tk.Tk()
 
 
 #Function that creates a red ball
-def createBall():
+def createShape():
     ball = turtle.Turtle();
     ball.shape("circle");
     ball.color("red");
 
-createBall()
+createShape()
 window.mainloop()
