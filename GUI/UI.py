@@ -14,6 +14,8 @@ button = tk.Button(root, text="Drop Shape", command=button_click)
 
 # Create a dropdown menu
 dropdown = ttk.Combobox(root, values=["Circle", "Square", "Triangle"])
+dropdown.set("Circle")  # Set the default option
+
 dropdown.pack()
 button.pack()
 
