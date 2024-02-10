@@ -10,7 +10,7 @@ window = tk.Tk()
 #Function that creates a red ball
 def createShape():
     ball = turtle.Turtle();
-    ball.shape("circle");
+    ball.shape("square");
     ball.color("red");
 
 createShape()
