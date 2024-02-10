@@ -9,9 +9,9 @@ window = tk.Tk()
 
 #Function that creates a red ball
 def createShape(shapeName):
-    ball = turtle.Turtle();
-    ball.shape(shapeName);
-    ball.color("red");
+    ball = turtle.Turtle()
+    ball.shape(shapeName)
+    ball.color("red")
     ball.pack()
 
 createShape("circle")
