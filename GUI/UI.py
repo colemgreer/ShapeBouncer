@@ -7,16 +7,23 @@ def button_click():
 
 root = tk.Tk()
 root.title("Shape Dropper")
-root.geometry("300x200")
+root.geometry("800x760")
 
 # Create a button
 button = tk.Button(root, text="Drop Shape", command=button_click)
 
 # Create a dropdown menu
-dropdown = ttk.Combobox(root, values=["Circle", "Square", "Triangle"])
-dropdown.set("Circle")  # Set the default option
+dropdown = ttk.Combobox(root, values=["circle", "square", "triangle"])
+dropdown.set("circle")  # Set the default option
 
 dropdown.pack()
 button.pack()
+
+listbox = tk.Listbox(root)
+listbox.pack(fill=tk.BOTH, expand=1)
+
+for z in range(40, -1, -1):
+    listbox.insert(tk.END, z)
+
 
 root.mainloop()
