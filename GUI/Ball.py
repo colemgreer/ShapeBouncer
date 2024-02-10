@@ -2,17 +2,17 @@ import turtle
 from turtle import *
 import tkinter as tk
 
-
+window = tk.Tk()
 
 #forward(100)
 
 
 #Function that creates a red ball
-def createShape():
-    window = tk.Tk();
+def createShape(shapeName):
     ball = turtle.Turtle();
-    ball.shape("square");
+    ball.shape(shapeName);
     ball.color("red");
-    window.mainloop();
+    ball.pack()
 
-createShape()
+createShape("circle")
+window.mainloop()
