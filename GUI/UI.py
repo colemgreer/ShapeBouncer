@@ -1,12 +1,14 @@
 import tkinter as tk
 from tkinter import ttk
 
+#Defines the starting points for the shapes
 x1 = 33
 y1 = 33
 
 x2 = 100
 y2 = 100
 
+#Creates the main window
 root = tk.Tk()
 root.title("Shape Dropper")
 root.geometry("800x760")
@@ -20,11 +22,12 @@ middle_pane.pack()
 bottom_pane = tk.Frame(root)
 bottom_pane.pack()
 
-
+#Physics variables
 gravity = 0.1
 velocity = 0
 xvelocity = 1
 
+#Draws the circle
 def draw_circle():
 
     global x1, x2, y1, y2, z1, gravity, velocity, xvelocity
@@ -57,7 +60,7 @@ def draw_circle():
         top_canvas.after(10, draw_circle)
         
     
-
+#Draws the square
 def draw_square():
     global x1, x2, y1, y2, z1, gravity, velocity, xvelocity
     top_canvas.delete("all")
@@ -95,10 +98,8 @@ def reset():
    
     x1 = y1 = 33
     x2 = y2 = 100
-    z1 = 66
 
-
-
+#Creates the buttons
 button = tk.Button(top_pane, text = "Drop Circle", command = draw_circle)
 button.pack(side = "left", expand = True, fill = "both")
 
@@ -107,13 +108,15 @@ button.pack(side = "left", expand = True, fill = "both")
 
 button = tk.Button(top_pane, text = "Reset", command = reset)
 button.pack(side = "left", expand = True, fill = "both")
-            
+
+#Creates the listboxes           
 left_listbox = tk.Listbox(middle_pane, width=2, height=30)
 left_listbox.pack(side = "left")
 
 for z in range(30, -1, -1):
     left_listbox.insert(tk.END, str(z))
 
+#Creates the canvases
 top_canvas = tk.Canvas(middle_pane, width = 740, height = 600, bg="skyblue")
 top_canvas.pack(side="left", expand = True, fill = "both")
 
