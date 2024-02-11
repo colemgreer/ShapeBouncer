@@ -7,6 +7,8 @@ y1 = 33
 x2 = 100
 y2 = 100
 
+z1 = 66
+
 root = tk.Tk()
 root.title("Shape Dropper")
 root.geometry("800x760")
@@ -22,25 +24,79 @@ bottom_pane.pack()
 
 
 
+
+
+
+
 gravity = 0.1
-direction = 0
+velocity = 0
 
 def draw_circle():
 
-    global x1, x2, y1, y2
+    global x1, x2, y1, y2, z1, gravity, velocity
     top_canvas.delete("all")
     ball = top_canvas.create_oval(x1, y1, x2, y2, fill = "red")
-    y1 += 0.1
-    y2 += 0.1
-    top_canvas.after(1, draw_circle)
+    
+    y1 -= velocity
+    y2 -= velocity
+
+    velocity -= gravity
+
+    print(velocity)
+
+    if(y2 >= 600):
+        velocity *= -1
+        if(velocity > 0.5):
+            velocity -= 0.75
+        else:
+            velocity = 0
+    if(velocity == 0):
+        top_canvas.after_cancel(top_canvas)
+    else:    
+        top_canvas.after(10, draw_circle)
+        
+    
 
 def draw_square():
+    #top_canvas.delete("all")
+    
+
+    global x1, x2, y1, y2, z1, gravity, velocity
     top_canvas.delete("all")
-    square = top_canvas.create_rectangle(33, 33, 100, 100, fill = "red")
+    square = top_canvas.create_rectangle(x1, y1, x2, y2, fill = "red")
+    
+    y1 -= velocity
+    y2 -= velocity
+
+    velocity -= gravity
+
+    print(velocity)
+
+    if(y2 >= 600):
+        velocity *= -1
+        if(velocity > 0.5):
+            velocity -= 0.75
+        else:
+            velocity = 0
+    if(velocity == 0):
+        top_canvas.after_cancel(top_canvas)
+    else:    
+        top_canvas.after(10, draw_square)
 
 def draw_triangle():
     top_canvas.delete("all")
     triangle = top_canvas.create_polygon(33, 33, 100, 33, 66, 100, fill = "red")
+
+def reset():
+    global x1, x2, y1, y2, z1
+    top_canvas.delete("all")
+    top_canvas.after_cancel(top_canvas)
+   
+    x1 = y1 = 33
+    x2 = y2 = 100
+    z1 = 66
+
+
 
 button = tk.Button(top_pane, text = "Drop Circle", command = draw_circle)
 button.pack(side = "left", expand = True, fill = "both")
@@ -51,13 +107,14 @@ button.pack(side = "left", expand = True, fill = "both")
 button = tk.Button(top_pane, text = "Drop Triangle", command = draw_triangle)
 button.pack(side = "left", expand = True, fill = "both")
 
-
+button = tk.Button(top_pane, text = "Reset", command = reset)
+button.pack(side = "left", expand = True, fill = "both")
+            
 left_listbox = tk.Listbox(middle_pane, width=2, height=30)
 left_listbox.pack(side = "left")
 
 for z in range(30, -1, -1):
     left_listbox.insert(tk.END, str(z))
-
 
 top_canvas = tk.Canvas(middle_pane, width = 740, height = 600, bg="skyblue")
 top_canvas.pack(side="left", expand = True, fill = "both")
@@ -70,5 +127,4 @@ for z in range(30, -1, -1):
 
 bottom_canvas = tk.Canvas(bottom_pane, width = 740, height = 100, bg="green")
 bottom_canvas.pack(side="bottom", expand = True, fill = "both")
-
 root.mainloop()
