@@ -24,11 +24,6 @@ bottom_pane = tk.Frame(root)
 bottom_pane.pack()
 
 
-
-
-
-
-
 gravity = 0.1
 velocity = 0
 
@@ -59,9 +54,6 @@ def draw_circle():
     
 
 def draw_square():
-    top_canvas.delete("all")
-    
-
     global x1, x2, y1, y2, z1, gravity, velocity
     top_canvas.delete("all")
     square = top_canvas.create_rectangle(x1, y1, x2, y2, fill = "red")
@@ -84,30 +76,6 @@ def draw_square():
     else:    
         top_canvas.after(10, draw_square)
 
-def draw_triangle():
-    top_canvas.delete("all")
-
-    global x1, x2, y1, y2, x3, y3, gravity, velocity
-    triangle = top_canvas.create_polygon(x1, y1, x2, y2, x3, y3, fill = "red")
-
-    y1 -= velocity
-    x1 -= velocity
-
-    velocity -= gravity
-
-    print(velocity)
-
-    if(y2 >= 600):
-        velocity *= -1
-        if(velocity > 0.5):
-            velocity -= 0.75
-        else:
-            velocity = 0
-    if(velocity == 0):
-        top_canvas.after_cancel(top_canvas)
-    else:
-        top_canvas.after(10, draw_triangle)
-
 def reset():
     global x1, x2, y1, y2, z1
     top_canvas.delete("all")
@@ -123,9 +91,6 @@ button = tk.Button(top_pane, text = "Drop Circle", command = draw_circle)
 button.pack(side = "left", expand = True, fill = "both")
 
 button = tk.Button(top_pane, text = "Drop Square", command = draw_square)
-button.pack(side = "left", expand = True, fill = "both")
-
-button = tk.Button(top_pane, text = "Drop Triangle", command = draw_triangle)
 button.pack(side = "left", expand = True, fill = "both")
 
 button = tk.Button(top_pane, text = "Reset", command = reset)
