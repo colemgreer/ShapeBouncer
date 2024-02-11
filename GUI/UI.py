@@ -1,6 +1,12 @@
 import tkinter as tk
 from tkinter import ttk
 
+x1 = 33
+y1 = 33
+
+x2 = 100
+y2 = 100
+
 root = tk.Tk()
 root.title("Shape Dropper")
 root.geometry("800x760")
@@ -14,17 +20,27 @@ middle_pane.pack()
 bottom_pane = tk.Frame(root)
 bottom_pane.pack()
 
+
+
+gravity = 0.1
+direction = 0
+
 def draw_circle():
+
+    global x1, x2, y1, y2
     top_canvas.delete("all")
-    top_canvas.create_oval(33, 33, 100, 100, fill = "red")
+    ball = top_canvas.create_oval(x1, y1, x2, y2, fill = "red")
+    y1 += 0.1
+    y2 += 0.1
+    top_canvas.after(1, draw_circle)
 
 def draw_square():
     top_canvas.delete("all")
-    top_canvas.create_rectangle(33, 33, 100, 100, fill = "red")
+    square = top_canvas.create_rectangle(33, 33, 100, 100, fill = "red")
 
 def draw_triangle():
     top_canvas.delete("all")
-    top_canvas.create_polygon(33, 33, 100, 33, 66, 100, fill = "red")
+    triangle = top_canvas.create_polygon(33, 33, 100, 33, 66, 100, fill = "red")
 
 button = tk.Button(top_pane, text = "Drop Circle", command = draw_circle)
 button.pack(side = "left", expand = True, fill = "both")
