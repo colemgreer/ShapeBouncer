@@ -7,7 +7,8 @@ y1 = 33
 x2 = 100
 y2 = 100
 
-z1 = 66
+x3 = 66
+y3 = 66
 
 root = tk.Tk()
 root.title("Shape Dropper")
@@ -58,7 +59,7 @@ def draw_circle():
     
 
 def draw_square():
-    #top_canvas.delete("all")
+    top_canvas.delete("all")
     
 
     global x1, x2, y1, y2, z1, gravity, velocity
@@ -85,7 +86,27 @@ def draw_square():
 
 def draw_triangle():
     top_canvas.delete("all")
-    triangle = top_canvas.create_polygon(33, 33, 100, 33, 66, 100, fill = "red")
+
+    global x1, x2, y1, y2, x3, y3, gravity, velocity
+    triangle = top_canvas.create_polygon(x1, y1, x2, y2, x3, y3, fill = "red")
+
+    y1 -= velocity
+    x1 -= velocity
+
+    velocity -= gravity
+
+    print(velocity)
+
+    if(y2 >= 600):
+        velocity *= -1
+        if(velocity > 0.5):
+            velocity -= 0.75
+        else:
+            velocity = 0
+    if(velocity == 0):
+        top_canvas.after_cancel(top_canvas)
+    else:
+        top_canvas.after(10, draw_triangle)
 
 def reset():
     global x1, x2, y1, y2, z1
