@@ -7,9 +7,6 @@ y1 = 33
 x2 = 100
 y2 = 100
 
-x3 = 66
-y3 = 66
-
 root = tk.Tk()
 root.title("Shape Dropper")
 root.geometry("800x760")
@@ -26,26 +23,34 @@ bottom_pane.pack()
 
 gravity = 0.1
 velocity = 0
+xvelocity = 1
 
 def draw_circle():
 
-    global x1, x2, y1, y2, z1, gravity, velocity
+    global x1, x2, y1, y2, z1, gravity, velocity, xvelocity
     top_canvas.delete("all")
     ball = top_canvas.create_oval(x1, y1, x2, y2, fill = "red")
     
     y1 -= velocity
     y2 -= velocity
 
-    velocity -= gravity
+    x1 += xvelocity
+    x2 += xvelocity
 
-    print(velocity)
+    velocity -= gravity
 
     if(y2 >= 600):
         velocity *= -1
         if(velocity > 0.5):
-            velocity -= 0.75
+            velocity -= 0.60
         else:
             velocity = 0
+    
+    if(x2 >= 740):
+        xvelocity *= -1
+    elif(x1 <= 0):
+        xvelocity *= -1
+
     if(velocity == 0):
         top_canvas.after_cancel(top_canvas)
     else:    
@@ -54,23 +59,30 @@ def draw_circle():
     
 
 def draw_square():
-    global x1, x2, y1, y2, z1, gravity, velocity
+    global x1, x2, y1, y2, z1, gravity, velocity, xvelocity
     top_canvas.delete("all")
     square = top_canvas.create_rectangle(x1, y1, x2, y2, fill = "red")
     
     y1 -= velocity
     y2 -= velocity
 
-    velocity -= gravity
+    x1 += xvelocity
+    x2 += xvelocity
 
-    print(velocity)
+    velocity -= gravity
 
     if(y2 >= 600):
         velocity *= -1
         if(velocity > 0.5):
-            velocity -= 0.75
+            velocity -= 0.60
         else:
             velocity = 0
+    
+    if(x2 >= 740):
+        xvelocity *= -1
+    elif(x1 <= 0):
+        xvelocity *= -1
+
     if(velocity == 0):
         top_canvas.after_cancel(top_canvas)
     else:    
